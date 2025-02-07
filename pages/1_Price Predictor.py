@@ -6,12 +6,13 @@ import gdown
 
 st.set_page_config(page_title="Viz Demo")
 
-# Google Drive file ID (Replace with actual ID)
-GDRIVE_LINK = "https://drive.google.com/file/d/14EpBBZHgl4r8qLLNvXpBSbSc9NR415Mz/view?usp=drive_link"
+HF_URL = "https://huggingface.co/shuvankar777/real/blob/main/pipeline.pkl"
 
-# Download pipeline.pkl from Google Drive
-pipeline_path = "pipeline.pkl"
-gdown.download(GDRIVE_LINK, pipeline_path, quiet=False)
+# Function to download pickle file
+def download_pickle(url, filename):
+    response = requests.get(url)
+    with open(filename, 'wb') as file:
+        file.write(response.content)
 
 # Load local files
 with open('df.pkl', 'rb') as file:
