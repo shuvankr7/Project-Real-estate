@@ -9,7 +9,6 @@ import seaborn as sns
 st.set_page_config(page_title="Plotting Demo")
 
 st.title('Analytics')
-
 new_df = pd.read_csv('datasets/data_viz1.csv')
 feature_text = pickle.load(open('datasets/feature_text.pkl','rb'))
 
@@ -23,18 +22,19 @@ fig = px.scatter_mapbox(group_df, lat="latitude", lon="longitude", color="price_
 
 st.plotly_chart(fig,use_container_width=True)
 
+
 st.header('Features Wordcloud')
+tf_path=r'C:\Windows\Fonts\arial.ttf'
+wordcloud = WordCloud(width = 800, height = 800,background_color ='black',stopwords = set(['s']),min_font_size = 10,font_path=tf_path).generate(feature_text)
 
-wordcloud = WordCloud(width = 800, height = 800,
-                      background_color ='black',
-                      stopwords = set(['s']),  # Any stopwords you'd like to exclude
-                      min_font_size = 10).generate(feature_text)
+# Create a figure explicitly
+fig, ax = plt.subplots(figsize=(8, 8))
+ax.imshow(wordcloud, interpolation='bilinear')
+ax.axis("off")  # Remove axes
+plt.tight_layout(pad=0)  # Adjust layout
 
-plt.figure(figsize = (8, 8), facecolor = None)
-plt.imshow(wordcloud, interpolation='bilinear')
-plt.axis("off")
-plt.tight_layout(pad = 0)
-st.pyplot()
+# Render the figure in Streamlit
+st.pyplot(fig)
 
 st.header('Area Vs Price')
 
@@ -82,13 +82,3 @@ sns.distplot(new_df[new_df['property_type'] == 'house']['price'],label='house')
 sns.distplot(new_df[new_df['property_type'] == 'flat']['price'], label='flat')
 plt.legend()
 st.pyplot(fig3)
-
-
-
-
-
-
-
-
-
-
