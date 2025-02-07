@@ -13,14 +13,11 @@ def download_pickle(url, filename):
     with open(filename, 'wb') as file:
         file.write(response.content)
 
-# Download pipeline.pkl
 pipeline_path = "pipeline.pkl"
 download_pickle(HF_URL, pipeline_path)
 
-# Load local files
 with open('df.pkl', 'rb') as file:
     df = pickle.load(file)
-
 
 with open(pipeline_path, 'rb') as file:
     pipeline = pickle.load(file)
