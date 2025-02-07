@@ -1,9 +1,8 @@
-sk-learn
+scikit-learn
 streamlit
-pickle
 pandas
 numpy
-plotly.express
+plotly
 wordcloud
-matplotlib.pyplot
+matplotlib
 seaborn
