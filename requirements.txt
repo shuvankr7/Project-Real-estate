@@ -1,1 +1,9 @@
 sklearn
+streamlit
+pickle
+pandas
+numpy
+plotly.express
+wordcloud
+matplotlib.pyplot
+seaborn
