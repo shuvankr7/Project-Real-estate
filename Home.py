@@ -28,7 +28,7 @@ st.markdown("""
     <div class="footer">
         <p>© 2025 Shuvankar Naskar | Powered by Streamlit 🚀</p>
         <p>
-            <a href="www.linkedin.com/in/shuvankar-naskar-data-scientist" target="_blank">
+            <a href="www.linkedin.com/in/shuvankar-naskar-data-scientist" target="www.linkedin.com/in/shuvankar-naskar-data-scientist">
                 <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" width="20"/>
                 LinkedIn
             </a>
