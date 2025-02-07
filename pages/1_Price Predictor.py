@@ -21,6 +21,7 @@ download_pickle(HF_URL, pipeline_path)
 with open('df.pkl', 'rb') as file:
     df = pickle.load(file)
 
+
 with open(pipeline_path, 'rb') as file:
     pipeline = pickle.load(file)
 
