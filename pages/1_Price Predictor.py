@@ -8,11 +8,14 @@ st.set_page_config(page_title="Viz Demo")
 
 HF_URL = "https://huggingface.co/shuvankar777/real/blob/main/pipeline.pkl"
 
-# Function to download pickle file
 def download_pickle(url, filename):
     response = requests.get(url)
     with open(filename, 'wb') as file:
         file.write(response.content)
+
+# Download pipeline.pkl
+pipeline_path = "pipeline.pkl"
+download_pickle(HF_URL, pipeline_path)
 
 # Load local files
 with open('df.pkl', 'rb') as file:
