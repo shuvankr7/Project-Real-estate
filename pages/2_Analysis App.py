@@ -86,3 +86,30 @@ sns.distplot(new_df[new_df['property_type'] == 'house']['price'],label='house')
 sns.distplot(new_df[new_df['property_type'] == 'flat']['price'], label='flat')
 plt.legend()
 st.pyplot(fig3)
+
+
+
+st.markdown("""
+    <style>
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+            background-color: #f1f1f1;
+            color: black;
+            font-size: 14px;
+        }
+    </style>
+    <div class="footer">
+        <p>© 2025 Shuvankar Naskar | Powered by Streamlit 🚀</p>
+        <p>
+            <a href="https://www.linkedin.com/in/shuvankar-naskar-data-scientist" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" width="20"/>
+                Connect on LinkedIn
+            </a>
+        </p>
+    </div>
+""", unsafe_allow_html=True)
+
