@@ -24,9 +24,13 @@ st.plotly_chart(fig,use_container_width=True)
 
 
 st.header('Features Wordcloud')
-tf_path=r'C:\Windows\Fonts\arial.ttf'
-wordcloud = WordCloud(width = 800, height = 800,background_color ='black',stopwords = set(['s']),min_font_size = 10,font_path=tf_path).generate(feature_text)
-
+wordcloud = WordCloud(
+    width=800, 
+    height=800,
+    background_color='black',
+    stopwords=set(['s']), 
+    min_font_size=10  # Removed font_path
+).generate(feature_text)
 # Create a figure explicitly
 fig, ax = plt.subplots(figsize=(8, 8))
 ax.imshow(wordcloud, interpolation='bilinear')
