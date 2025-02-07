@@ -1,4 +1,4 @@
-sklearn
+sk-learn
 streamlit
 pickle
 pandas
