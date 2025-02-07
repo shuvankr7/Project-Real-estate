@@ -1,1 +1,10 @@
 streamlit
+pickle
+pandas
+numpy
+pandas
+plotly.express
+wordcloud
+matplotlib.pyplot
+seaborn
+gdown
