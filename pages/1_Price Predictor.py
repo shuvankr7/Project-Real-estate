@@ -6,7 +6,7 @@ import requests
 
 st.set_page_config(page_title="Viz Demo")
 
-HF_URL = "https://huggingface.co/shuvankar777/real/blob/main/pipeline.pkl"
+HF_URL = "https://huggingface.co/shuvankar777/real/resolve/main/pipeline.pkl"
 
 def download_pickle(url, filename):
     response = requests.get(url)
