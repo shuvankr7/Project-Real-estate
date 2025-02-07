@@ -12,6 +12,8 @@ st.write('\n')
 st.write('Please note - This model is build on data of gurgaon only')
 
 
+
+
 st.markdown("""
     <style>
         .footer {
@@ -24,17 +26,27 @@ st.markdown("""
             color: black;
             font-size: 14px;
         }
+        .footer a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+        .footer img {
+            vertical-align: middle;
+            margin-right: 5px;
+        }
     </style>
     <div class="footer">
         <p>© 2025 Shuvankar Naskar | Powered by Streamlit 🚀</p>
         <p>
-            <a href="www.linkedin.com/in/shuvankar-naskar-data-scientist" target="www.linkedin.com/in/shuvankar-naskar-data-scientist">
+            <a href="www.linkedin.com/in/shuvankar-naskar-data-scientist" target="_blank">
                 <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" width="20"/>
-                LinkedIn
+                Connect on LinkedIn
             </a>
         </p>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 st.sidebar.success("Select a demo above.")
