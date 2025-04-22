@@ -3,24 +3,36 @@ import pickle
 import pandas as pd
 import numpy as np
 import requests
-
+from huggingface_hub import hf_hub_download
+import pickle
 st.set_page_config(page_title="Viz Demo")
 
-HF_URL = "https://huggingface.co/shuvankar777/real/resolve/main/pipeline.pkl"
+repo_id = "shuvankar777/real"
+filename = "pipeline.pkl"
+
+# Download the file
+file_path = hf_hub_download(repo_id=repo_id, filename=filename)
+
+# Load the pickle file
+with open(file_path, 'rb') as file:
+    pipeline = pickle.load(file)
+
+
+# HF_URL = "https://huggingface.co/shuvankar777/real/resolve/main/pipeline.pkl"
 
 def download_pickle(url, filename):
     response = requests.get(url)
     with open(filename, 'wb') as file:
         file.write(response.content)
 
-pipeline_path = "pipeline.pkl"
-download_pickle(HF_URL, pipeline_path)
+# pipeline_path = "pipeline.pkl"
+# download_pickle(HF_URL, pipeline_path)
 
 with open('df.pkl', 'rb') as file:
     df = pickle.load(file)
 
-with open(pipeline_path, 'rb') as file:
-    pipeline = pickle.load(file)
+# with open(pipeline_path, 'rb') as file:
+#     pipeline = pickle.load(file)
 
 st.header('Enter your inputs')
 
