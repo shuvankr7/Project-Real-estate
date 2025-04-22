@@ -4,10 +4,10 @@ import pandas as pd
 import numpy as np
 import requests
 import os
-st.set_page_config(page_title="Viz Demo")
+st.set_page_config(page_title="Gurgaon Real Estate")
 
 # Hugging Face File Info
-HF_URL = os.getenv('HF_URL', 'https://huggingface.co/shuvankar777/real/resolve/main/pipeline.pkl')  # Default to provided URL if not set
+HF_URL = os.getenv('HF_URL', 'https://huggingface.co/shuvankar777/real/resolve/main/pipeline.pkl')  
 HF_TOKEN = os.getenv('HF_TOKEN', 'your_default_token_here') 
 
 # Secure download using Hugging Face token
