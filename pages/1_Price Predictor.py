@@ -2,30 +2,40 @@ import streamlit as st
 import pickle
 import pandas as pd
 import numpy as np
-from huggingface_hub import hf_hub_download
+import requests
 
-# Set page config FIRST
 st.set_page_config(page_title="Viz Demo")
 
-# Download model pipeline from HuggingFace
-@st.cache_resource
-def load_pipeline():
-    pipeline_path = hf_hub_download(repo_id="shuvankar777/real", filename="pipeline.pkl")
+HF_URL = "https://huggingface.co/shuvankar777/real/resolve/main/pipeline.pkl"
+pipeline_path = "pipeline.pkl"
+
+# Download the pickle file (ONLY if not already downloaded)
+def download_pickle(url, filename):
+    response = requests.get(url)
+    if response.status_code == 200:
+        with open(filename, 'wb') as file:
+            file.write(response.content)
+    else:
+        st.error(f"Failed to download pipeline. Status code: {response.status_code}")
+        st.stop()
+
+download_pickle(HF_URL, pipeline_path)
+
+# Load your df.pkl (you said don't modify this)
+with open('df.pkl', 'rb') as file:
+    df = pickle.load(file)
+
+# Load pipeline.pkl
+try:
     with open(pipeline_path, 'rb') as file:
-        return pickle.load(file)
+        pipeline = pickle.load(file)
+except Exception as e:
+    st.error("❌ Error loading the pipeline.pkl. Possibly a corrupted file.")
+    st.code(str(e))
+    st.stop()
 
-# Load local dataframe
-@st.cache_resource
-def load_df():
-    with open('df.pkl', 'rb') as file:
-        return pickle.load(file)
-
-pipeline = load_pipeline()
-df = load_df()
-
-# UI Inputs
+# UI
 st.header('Enter your inputs')
-
 property_type = st.selectbox('Property Type', ['flat', 'house'])
 sector = st.selectbox('Sector', sorted(df['sector'].unique().tolist()))
 bedrooms = float(st.selectbox('Number of Bedroom', sorted(df['bedRoom'].unique().tolist())))
@@ -39,26 +49,22 @@ furnishing_type = st.selectbox('Furnishing Type', sorted(df['furnishing_type'].u
 luxury_category = st.selectbox('Luxury Category', sorted(df['luxury_category'].unique().tolist()))
 floor_category = st.selectbox('Floor Category', sorted(df['floor_category'].unique().tolist()))
 
-# Prediction
 if st.button('Predict'):
-    data = [[
-        property_type, sector, bedrooms, bathroom, balcony,
-        property_age, built_up_area, servant_room, store_room,
-        furnishing_type, luxury_category, floor_category
-    ]]
-    columns = [
-        'property_type', 'sector', 'bedRoom', 'bathroom', 'balcony',
-        'agePossession', 'built_up_area', 'servant room', 'store room',
-        'furnishing_type', 'luxury_category', 'floor_category'
-    ]
-    input_df = pd.DataFrame(data, columns=columns)
+    data = [[property_type, sector, bedrooms, bathroom, balcony, property_age,
+             built_up_area, servant_room, store_room, furnishing_type,
+             luxury_category, floor_category]]
 
-    base_price = np.expm1(pipeline.predict(input_df))[0]
+    columns = ['property_type', 'sector', 'bedRoom', 'bathroom', 'balcony',
+               'agePossession', 'built_up_area', 'servant room', 'store room',
+               'furnishing_type', 'luxury_category', 'floor_category']
+
+    one_df = pd.DataFrame(data, columns=columns)
+
+    base_price = np.expm1(pipeline.predict(one_df))[0]
     low, high = base_price - 0.22, base_price + 0.22
 
-    st.success(f"💰 Estimated price: ₹{round(low, 2)} Cr to ₹{round(high, 2)} Cr")
+    st.text(f"The price of the flat is between {round(low, 2)} Cr and {round(high, 2)} Cr")
 
-# Footer
 st.markdown("""
     <style>
         .footer {
