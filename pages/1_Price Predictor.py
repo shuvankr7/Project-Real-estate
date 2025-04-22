@@ -7,8 +7,8 @@ import requests
 st.set_page_config(page_title="Viz Demo")
 
 # Hugging Face File Info
-HF_URL = "https://huggingface.co/shuvankar777/real/resolve/main/pipeline.pkl"
-HF_TOKEN = "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"
+HF_URL = os.getenv('HF_URL', 'https://huggingface.co/shuvankar777/real/resolve/main/pipeline.pkl')  # Default to provided URL if not set
+HF_TOKEN = os.getenv('HF_TOKEN', 'your_default_token_here') 
 
 # Secure download using Hugging Face token
 def download_pickle(url, filename, token):
