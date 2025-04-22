@@ -6,11 +6,9 @@ import requests
 import os
 st.set_page_config(page_title="Gurgaon Real Estate")
 
-# Hugging Face File Info
 HF_URL = os.getenv('HF_URL', 'https://huggingface.co/shuvankar777/real/resolve/main/pipeline.pkl')  
 HF_TOKEN = os.getenv('HF_TOKEN', 'your_default_token_here') 
 
-# Secure download using Hugging Face token
 def download_pickle(url, filename, token):
     headers = {"Authorization": f"Bearer {token}"}
     response = requests.get(url, headers=headers)
@@ -18,21 +16,18 @@ def download_pickle(url, filename, token):
         with open(filename, 'wb') as file:
             file.write(response.content)
     else:
-        st.error(f"❌ Failed to download pipeline. Status code: {response.status_code}")
+        st.error(f" Failed to download pipeline. Status code: {response.status_code}")
         st.stop()
 
 pipeline_path = "pipeline.pkl"
 download_pickle(HF_URL, pipeline_path, HF_TOKEN)
 
-# Load df.pkl (local)
 with open('df.pkl', 'rb') as file:
     df = pickle.load(file)
 
-# Load downloaded pipeline
 with open(pipeline_path, 'rb') as file:
     pipeline = pickle.load(file)
 
-# Streamlit UI
 st.header('Enter your inputs')
 
 property_type = st.selectbox('Property Type', ['flat', 'house'])
@@ -73,7 +68,7 @@ st.markdown("""
         }
     </style>
     <div class="footer">
-        <p>© 2025 Shuvankar Naskar | Powered by Streamlit 🚀</p>
+        <p>© 2025 Shuvankar Naskar | Powered by Streamlit </p>
         <p>
             <a href="https://www.linkedin.com/in/shuvankar-naskar-data-scientist" target="_blank">
                 <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" width="20"/>
